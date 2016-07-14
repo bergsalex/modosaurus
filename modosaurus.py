@@ -80,11 +80,10 @@ relative = [[((i+n) % 12, i, (12-n) % 12)
              if n in t.keys())]
             for n in xrange(0, 11)]
 
-
-a = [[(name, t2[n[2]], n[0] in scale, t2[n[1]]) for n in rel]
+a = [[(name, t2[n[2]], n[0] in scale, t2[n[1]], scale) for n in rel]
      for name, scale in scales.iteritems()
      for rel in relative]
 
 matches = [i[0] for i in a if all(x[2] for x in i)]
 for match in matches:
-    print "%s %s" % (match[1], match[0])
+    print "%s %s: %s" % (match[1], match[0], ' '.join([t2[(i + t[match[1]]) % 12] for i in match[4]]))

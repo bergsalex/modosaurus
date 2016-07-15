@@ -4,7 +4,9 @@ import argparse
 
 parser = argparse.ArgumentParser(description='A tool to match groups of notes to possible scales')
 
-parser.add_argument('Notes', metavar='N', nargs='+')
+parser.add_argument('Notes', metavar='N', nargs='+', help='A note (e.g. Ab, E#, G)')
+
+parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.1.1')
 
 args = parser.parse_args()
 

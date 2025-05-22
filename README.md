@@ -12,4 +12,4 @@ optional arguments:
   -v, --version  show program's version number and exit
 ```
 
-Don't write code like this.
+The script has been updated to modern Python 3 standards for improved readability and maintainability.

@@ -1,0 +1,12 @@
+[project]
+name = "modosaurus"
+version = "0.1.0"
+description = "A tool for managing and transforming source code."
+authors = [
+    {name = "Alexander Berger", email = "bergs.alex@gmail.com"},
+]
+dependencies = []
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+backend-path = ["."]

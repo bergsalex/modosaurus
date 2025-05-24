@@ -6,14 +6,8 @@ class TestModosaurus(unittest.TestCase):
 
     def _run_modosaurus(self, notes):
         """Helper function to run modosaurus.py and return its output."""
-        # Ensure modosaurus.py is in the same directory or adjust path as needed
-        script_path = "./modosaurus.py"
-        if not os.path.exists(script_path):
-            # Fallback to assuming it might be found via python execution
-            script_path = "modosaurus.py" # This might require `python modosaurus.py`
-            cmd = ["python", script_path] + notes
-        else:
-            cmd = [script_path] + notes
+        # Construct the command to run modosaurus.__main__ with the provided notes
+        cmd = ["python", "-m", "modosaurus.__main__"] + notes
             
         try:
             result = subprocess.run(
@@ -21,7 +15,8 @@ class TestModosaurus(unittest.TestCase):
                 capture_output=True,
                 text=True,
                 check=True,  # Will raise CalledProcessError if return code is non-zero
-                timeout=10  # Add a timeout to prevent tests from hanging
+                timeout=10,  # Add a timeout to prevent tests from hanging
+                cwd="../"
             )
             return result.stdout, result.stderr
         except subprocess.CalledProcessError as e:
@@ -31,7 +26,7 @@ class TestModosaurus(unittest.TestCase):
                             f"Stderr:\n{e.stderr}"
             self.fail(error_message)
         except FileNotFoundError:
-            self.fail(f"Script {script_path} not found. Make sure it's in the current directory and executable, or executable via 'python'.")
+            self.fail(f"Command {' '.join(cmd)} not found. Ensure Python is in PATH and the module exists.")
         except subprocess.TimeoutExpired:
             self.fail(f"modosaurus.py timed out with input: {' '.join(notes)}")
 
